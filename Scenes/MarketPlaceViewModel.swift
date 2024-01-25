@@ -2,7 +2,7 @@
 //  MarketPlaceViewModel.swift
 //  currency_rates
 //
-//  Created by Pablo Ruiz on 19/1/24.
+//  Created by Carlos Garcia Vicen on 19/1/24.
 //
 
 import Foundation
@@ -22,9 +22,6 @@ class MarketPlaceViewModel: ObservableObject {
     private let transactionsRepository: TransactionsRepository
     
     private let transactionsHelper = TransactionsHelper()
-    
-    private var exchangeRatesMatrix: [[Double]]?
-    private var matrixIndices: [String: Int]?
 
     var currencies: [String] {
         let uniqueCurrencies = Set(rates.map { $0.to })
@@ -68,12 +65,15 @@ class MarketPlaceViewModel: ObservableObject {
         isLoading = false
     }
 
-    
     func filterTransactions(byProduct product: String) {
         filterTransactions = transactions.filter { $0.sku == product }
     }
     
     func convertCurrency(amount: Double, fromCurrency: String, toCurrency: String) -> Double {
         transactionsHelper.convertCurrency(amount: amount, fromCurrency: fromCurrency, toCurrency: toCurrency)
+    }
+    
+    func calculateTotalAmountConverted(forProduct product: String, toCurrency currency: String) -> Double {
+        transactionsHelper.calculateTotalAmountConverted(transactions: transactions, forProduct: product, toCurrency: currency)
     }
 }

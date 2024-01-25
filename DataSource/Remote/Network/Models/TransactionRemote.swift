@@ -2,7 +2,7 @@
 //  TransactionRemote.swift
 //  currency_rates
 //
-//  Created by Pablo Ruiz on 22/1/24.
+//  Created by Carlos Garcia Vicen on 22/1/24.
 //
 
 import Foundation

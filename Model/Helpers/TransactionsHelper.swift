@@ -2,7 +2,7 @@
 //  TransactionsHelper.swift
 //  currency_rates
 //
-//  Created by Pablo Ruiz on 22/1/24.
+//  Created by Carlos Garcia Vicen on 22/1/24.
 //
 
 import Foundation
@@ -51,5 +51,17 @@ class TransactionsHelper {
               let rate = exchangeRatesMatrix?[fromIndex][toIndex],
               rate != Double.greatestFiniteMagnitude else { return 0.0 }
         return amount * rate
+    }
+    
+    func calculateTotalAmountConverted(transactions: [Transaction], forProduct product: String, toCurrency currency: String) -> Double {
+        let filteredTransactions = transactions.filter { $0.sku == product }
+        
+        return filteredTransactions.reduce(0) { total, transaction in
+            if let amount = Double(transaction.amount) {
+                let convertedAmount = transaction.currency == currency ? amount : convertCurrency(amount: amount, fromCurrency: transaction.currency, toCurrency: currency)
+                return total + convertedAmount
+            }
+            return total
+        }
     }
 }

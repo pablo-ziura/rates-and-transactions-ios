@@ -2,7 +2,7 @@
 //  Coordinator.swift
 //  currency_rates
 //
-//  Created by Pablo Ruiz on 19/1/24.
+//  Created by Carlos Garcia Vicen on 19/1/24.
 //
 
 import Foundation
@@ -30,11 +30,4 @@ class Coordinator: ObservableObject {
             transactionsRepository: transactionsRepository
         )
     }
-    
-    func createMarketPlaceView() -> MarketPlaceView {
-        MarketPlaceView(
-            viewModel: createMarketPlaceViewModel()
-        )
-    }
-    	
 }
